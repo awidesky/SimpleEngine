@@ -1,0 +1,51 @@
+cmake_minimum_required( VERSION 3.8 )
+
+project( SimpleEngine )
+
+find_package( OpenGL REQUIRED )
+
+set(GLFW_ROOT_DIR "${PROJECT_SOURCE_DIR}/glfw")
+set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
+set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
+set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
+
+set(SIMPLEENGINE_MAKE_DEMO OFF CACHE BOOL "Put demo files in buildsystem too")
+
+add_subdirectory( glfw )
+add_subdirectory( glew )
+
+
+set(ALL_INCLUDES
+	"${PROJECT_SOURCE_DIR}/include"
+	"${PROJECT_SOURCE_DIR}/glew/include"
+	"${PROJECT_SOURCE_DIR}/glfw/include"
+)
+
+set(ALL_LIBS
+	"glfw"
+	"libglew_static"
+)
+
+set(HEADERS
+	include/ahh.h
+	include/Game.hpp
+	include/Shader.hpp
+)
+
+AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/src SRCFILES)
+
+add_library(SimpleEngine ${SRCFILES} ${HEADERS})
+
+include_directories(${ALL_INCLUDES})
+	
+target_link_libraries(SimpleEngine ${ALL_LIBS})
+
+
+
+if(MAKE_DEMO)
+
+  #ballastic demo
+  add_executable(demo_ballastic demo_ballastic/aaa.cpp)
+  target_link_libraries(demo_ballastic ${ALL_LIBS})
+
+endif()
