@@ -9,7 +9,11 @@ set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
 set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
 set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
 
-set(SIMPLEENGINE_MAKE_DEMO OFF CACHE BOOL "Put demo files in buildsystem too")
+set(glew_cmake_BUILD_STATIC ON CACHE BOOL "" FORCE )
+set(glew_cmake_BUILD_SHARED OFF CACHE BOOL "" FORCE )
+
+
+option(SIMPLEENGINE_MAKE_DEMO "Put demo files in buildsystem too" OFF)
 
 add_subdirectory( glfw )
 add_subdirectory( glew )
@@ -36,7 +40,8 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/src SRCFILES)
 
 add_library(SimpleEngine ${SRCFILES} ${HEADERS})
 
-include_directories(${ALL_INCLUDES})
+target_include_directories(SimpleEngine PRIVATE ${ALL_INCLUDES})
+target_include_directories(SimpleEngine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)
 	
 target_link_libraries(SimpleEngine ${ALL_LIBS})
 
