@@ -30,13 +30,20 @@ set(ALL_LIBS
 	"libglew_static"
 )
 
-set(HEADERS
-	include/ahh.h
-	include/Game.hpp
-	include/Shader.hpp
+
+set(SRCFILES
+	src/playground.cpp
 )
 
-AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/src SRCFILES)
+set(HEADERS
+
+	include/spe/Game.hpp
+
+	include/spe/graphics/opengl/ahh.h
+	include/spe/graphics/opengl/Shader.hpp
+)
+
+#AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/src SRCFILES)
 
 add_library(SimpleEngine ${SRCFILES} ${HEADERS})
 
