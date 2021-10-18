@@ -2,32 +2,23 @@ cmake_minimum_required( VERSION 3.8 )
 
 project( SimpleEngine )
 
-find_package( OpenGL REQUIRED )
-
-set(GLFW_ROOT_DIR "${PROJECT_SOURCE_DIR}/glfw")
-set(GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE )
-set(GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE )
-set(GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE )
-
-set(glew-cmake_BUILD_STATIC ON CACHE BOOL "" FORCE )
-set(glew-cmake_BUILD_SHARED OFF CACHE BOOL "" FORCE )
-
 
 option(SIMPLEENGINE_MAKE_DEMO "Put demo files in buildsystem too" OFF)
 
-add_subdirectory( glfw )
-add_subdirectory( glew )
+add_subdirectory( physics-engine )
+add_subdirectory( graphic-engine )
 
 
 set(ALL_INCLUDES
 	"${PROJECT_SOURCE_DIR}/include"
-	"${PROJECT_SOURCE_DIR}/glew/include"
-	"${PROJECT_SOURCE_DIR}/glfw/include"
+	"${PROJECT_SOURCE_DIR}/physics-engine/include"
+	"${PROJECT_SOURCE_DIR}/grapic-engine/include"
 )
 
+#Change library name as needed!
 set(ALL_LIBS
-	"glfw"
-	"libglew_static"
+	"spear"
+	"sofre"
 )
 
 
